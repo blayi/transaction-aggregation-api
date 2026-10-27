@@ -1,5 +1,5 @@
 package com.blayi.transactionaggregation;
-
+import com.blayi.transactionaggregation.service.TransactionAggregationService;
 import com.blayi.transactionaggregation.model.Transaction;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -33,15 +33,17 @@ public class TransactionAggregationApplication {
     List<Transaction> transactions = new ArrayList<>();
     transactions.add(firstTransaction);
     transactions.add(secondTransaction);
+    TransactionAggregationService aggregationService =
+        new TransactionAggregationService();
+        
     System.out.println("Number of transactions: " + transactions.size());
 
-    BigDecimal totalAmount = BigDecimal.ZERO;
+BigDecimal totalAmount = aggregationService.calculateTotal(transactions);
 
-    for (Transaction transaction : transactions) {
-      System.out.println(transaction.getMerchant());
-      totalAmount = totalAmount.add(transaction.getAmount());
-    }
-    System.out.println("Total amount: " + totalAmount);
+for (Transaction transaction : transactions) {
+    System.out.println(transaction.getMerchant());
+}
 
+System.out.println("Total amount: " + totalAmount);
   }
 }
