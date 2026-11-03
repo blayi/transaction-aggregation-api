@@ -1,49 +1,12 @@
 package com.blayi.transactionaggregation;
-import com.blayi.transactionaggregation.service.TransactionAggregationService;
-import com.blayi.transactionaggregation.model.Transaction;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.ArrayList;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class TransactionAggregationApplication {
-  public static void main(String[] args) {
 
-    Transaction firstTransaction = new Transaction(
-        "id01",
-        "Woolworths",
-        new BigDecimal("654"),
-        LocalDateTime.of(2026, 10, 19, 11, 22));
-
-    System.out.println(firstTransaction.getMerchant());
-    System.out.println(firstTransaction.getTransactionId());
-    System.out.println(firstTransaction.getAmount());
-    System.out.println(firstTransaction.getTransactionDateTime());
-
-    Transaction secondTransaction = new Transaction(
-        "id02",
-        "Pep",
-        new BigDecimal("700"),
-        LocalDateTime.of(2026, 10, 23, 12, 27));
-    System.out.println(secondTransaction.getMerchant());
-    System.out.println(secondTransaction.getTransactionId());
-    System.out.println(secondTransaction.getAmount());
-    System.out.println(secondTransaction.getTransactionDateTime());
-
-    List<Transaction> transactions = new ArrayList<>();
-    transactions.add(firstTransaction);
-    transactions.add(secondTransaction);
-    TransactionAggregationService aggregationService =
-        new TransactionAggregationService();
-        
-    System.out.println("Number of transactions: " + transactions.size());
-
-BigDecimal totalAmount = aggregationService.calculateTotal(transactions);
-
-for (Transaction transaction : transactions) {
-    System.out.println(transaction.getMerchant());
-}
-
-System.out.println("Total amount: " + totalAmount);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(TransactionAggregationApplication.class, args);
+    }
 }

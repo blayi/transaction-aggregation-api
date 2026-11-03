@@ -8,6 +8,9 @@ public class Transaction {
         private BigDecimal amount;
         private LocalDateTime transactionDateTime;
 
+public Transaction() {
+}
+
 public Transaction(String transactionId, String merchant, BigDecimal amount, LocalDateTime transactionDateTime) {
         this.transactionId = transactionId;
         this.merchant = merchant;
@@ -28,6 +31,22 @@ public LocalDateTime getTransactionDateTime(){
 }
 public String getTransactionId(){
         return transactionId;
+}
+
+public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+}
+
+public void setMerchant(String merchant) {
+    this.merchant = merchant;
+}
+
+public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+}
+
+public void setTransactionDateTime(LocalDateTime transactionDateTime) {
+    this.transactionDateTime = transactionDateTime;
 }
 
 }
