@@ -1,6 +1,7 @@
 package com.blayi.transactionaggregation.controller;
 
 import com.blayi.transactionaggregation.model.Transaction;
+import jakarta.validation.Valid;
 import com.blayi.transactionaggregation.service.TransactionAggregationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class TransactionController {
     }
 
     @PostMapping
-public Transaction addTransaction(@RequestBody Transaction transaction) {
+public Transaction addTransaction(@Valid @RequestBody Transaction transaction) {
     return aggregationService.addTransaction(transaction);
 }
 
