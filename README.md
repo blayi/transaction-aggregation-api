@@ -20,6 +20,34 @@ The project currently stores transactions in memory. This means that the transac
 - Calculate the total transaction amount
 - Validate transaction information
 
+## Project Structure
+
+- `model` contains the transaction information.
+- `service` stores the transactions and calculates the total amount.
+- `controller` provides the API endpoints.
+
+## Validation Rules
+
+A transaction must have:
+
+- A transaction ID
+- A merchant name
+- An amount greater than zero
+- A transaction date and time
+
+If validation fails, the API returns a `400 Bad Request` response with the fields that need to be corrected.
+
+Example validation response:
+
+```json
+{
+  "amount": "Amount must be greater than zero",
+  "transactionDateTime": "Transaction date and time are required",
+  "merchant": "Merchant is required",
+  "transactionId": "Transaction ID is required"
+}
+```
+
 ## Run the Application
 
 Run the following command from the project folder:
@@ -32,6 +60,7 @@ The application runs on:
 
 ```text
 http://localhost:8080
+```
 
 ## API Documentation
 
@@ -103,4 +132,11 @@ Run the container:
 ```bash
 docker run --rm -p 8080:8080 transaction-aggregation-api
 ```
+## Automatic Docker Check
 
+GitHub Actions automatically:
+
+- Builds the Docker image
+- Starts the Docker container
+- Checks that the transactions endpoint responds
+- Stops the container after the check

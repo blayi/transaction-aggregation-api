@@ -17,3 +17,15 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t transaction-aggregation-api .
+
+      - name: Run Docker container
+        run: docker run -d --name transaction-api -p 8080:8080 transaction-aggregation-api
+
+      - name: Check the API
+        run: |
+          sleep 10
+          curl --fail http://localhost:8080/api/transactions
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop transaction-api || true
