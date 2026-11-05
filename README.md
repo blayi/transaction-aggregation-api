@@ -32,6 +32,16 @@ The application runs on:
 
 ```text
 http://localhost:8080
+
+## API Documentation
+
+After starting the application, Swagger can be opened at:
+
+```text
+http://localhost:8080/swagger-ui.html
+```
+
+Swagger shows the available endpoints and can also be used to test the API.
 ```
 
 ## API Endpoints
