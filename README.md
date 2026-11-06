@@ -1,10 +1,12 @@
 # Transaction Aggregation API
 
-A simple Spring Boot API that stores transactions and calculates a transaction summary.
+This is a small Spring Boot API for working with transactions.
 
-The project currently stores transactions in memory. This means that the transactions are removed when the application is stopped.
+It can add transactions, show the saved transactions and calculate their total amount.
 
-## Technologies Used
+The transactions are stored in memory. This means the data is cleared when the application stops.
+
+## Tools Used
 
 - Java 21
 - Spring Boot
@@ -12,76 +14,49 @@ The project currently stores transactions in memory. This means that the transac
 - JUnit
 - Docker
 
-## Features
+## Run the Project
 
-- Add a transaction
-- View all transactions
-- View the number of transactions
-- Calculate the total transaction amount
-- Validate transaction information
-
-## Project Structure
-
-- `model` contains the transaction information.
-- `service` stores the transactions and calculates the total amount.
-- `controller` provides the API endpoints.
-
-## Validation Rules
-
-A transaction must have:
-
-- A transaction ID
-- A merchant name
-- An amount greater than zero
-- A transaction date and time
-
-If validation fails, the API returns a `400 Bad Request` response with the fields that need to be corrected.
-
-Example validation response:
-
-```json
-{
-  "amount": "Amount must be greater than zero",
-  "transactionDateTime": "Transaction date and time are required",
-  "merchant": "Merchant is required",
-  "transactionId": "Transaction ID is required"
-}
-```
-
-## Run the Application
-
-Run the following command from the project folder:
+From the project folder, run:
 
 ```bash
 mvn spring-boot:run
 ```
 
-The application runs on:
+The API runs on:
 
 ```text
 http://localhost:8080
 ```
 
-## API Documentation
-
-After starting the application, Swagger can be opened at:
+Swagger can be opened here:
 
 ```text
 http://localhost:8080/swagger-ui.html
 ```
 
-Swagger shows the available endpoints and can also be used to test the API.
-```
+Swagger can be used to view and test the endpoints.
 
-## API Endpoints
+## Endpoints
 
-### Add a Transaction
+Add a transaction:
 
 ```text
 POST /api/transactions
 ```
 
-Example request:
+View all transactions:
+
+```text
+GET /api/transactions
+```
+
+View the transaction count and total amount:
+
+```text
+GET /api/transactions/summary
+```
+
+Example transaction:
 
 ```json
 {
@@ -92,36 +67,28 @@ Example request:
 }
 ```
 
-### View All Transactions
+## Validation
 
-```text
-GET /api/transactions
-```
+A transaction needs:
 
-### View Transaction Summary
+- A transaction ID
+- A merchant
+- An amount greater than zero
+- A date and time
 
-```text
-GET /api/transactions/summary
-```
+Invalid transactions return a `400 Bad Request` response with a message explaining what is missing or incorrect.
 
-Example response:
+## Tests
 
-```json
-{
-  "transactionCount": 2,
-  "totalAmount": 1354
-}
-```
-
-## Run the Tests
+Run the tests with:
 
 ```bash
 mvn test
 ```
 
-## Run with Docker
+## Docker
 
-Build the Docker image:
+Build the image:
 
 ```bash
 docker build -t transaction-aggregation-api .
@@ -132,11 +99,5 @@ Run the container:
 ```bash
 docker run --rm -p 8080:8080 transaction-aggregation-api
 ```
-## Automatic Docker Check
 
-GitHub Actions automatically:
-
-- Builds the Docker image
-- Starts the Docker container
-- Checks that the transactions endpoint responds
-- Stops the container after the check
+GitHub Actions also builds the image, starts the container and checks that the API responds.
